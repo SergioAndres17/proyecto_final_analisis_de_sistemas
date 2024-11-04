@@ -1,0 +1,154 @@
+@startuml
+entity Cliente {
+    +ID_Cliente : INT (PK)
+    Nombre : VARCHAR
+    Apellido : VARCHAR
+    Telefono : VARCHAR
+    Email : VARCHAR
+    created_at : DATETIME
+    created_by : INT (FK)
+    updated_at : DATETIME
+    updated_by : INT (FK)
+    deleted_at : DATETIME
+    deleted_by : INT (FK)
+}
+
+entity Vendedor {
+    +ID_Vendedor : INT (PK)
+    Nombre : VARCHAR
+    Apellido : VARCHAR
+    Telefono : VARCHAR
+    Email : VARCHAR
+    created_at : DATETIME
+    created_by : INT (FK)
+    updated_at : DATETIME
+    updated_by : INT (FK)
+    deleted_at : DATETIME
+    deleted_by : INT (FK)
+}
+
+entity Moto {
+    +ID_Moto : INT (PK)
+    Modelo : VARCHAR
+    Marca : VARCHAR
+    Precio : DECIMAL
+    Año : INT
+    Color : VARCHAR
+    Cantidad_Disponible : INT
+    created_at : DATETIME
+    created_by : INT (FK)
+    updated_at : DATETIME
+    updated_by : INT (FK)
+    deleted_at : DATETIME
+    deleted_by : INT (FK)
+}
+
+entity Proveedor {
+    +ID_Proveedor : INT (PK)
+    Nombre : VARCHAR
+    Telefono : VARCHAR
+    Email : VARCHAR
+    Direccion : VARCHAR
+    created_at : DATETIME
+    created_by : INT (FK)
+    updated_at : DATETIME
+    updated_by : INT (FK)
+    deleted_at : DATETIME
+    deleted_by : INT (FK)
+}
+
+entity Usuario {
+    +ID_Usuario : INT (PK)
+    Nombre : VARCHAR
+    Rol : VARCHAR
+    Email : VARCHAR
+    Contraseña : VARCHAR
+    created_at : DATETIME
+    created_by : INT (FK)
+    updated_at : DATETIME
+    updated_by : INT (FK)
+    deleted_at : DATETIME
+    deleted_by : INT (FK)
+}
+
+entity Venta {
+    +ID_Venta : INT (PK)
+    Fecha_Venta : DATETIME
+    Total : DECIMAL
+    ID_Cliente : INT (FK)
+    ID_Vendedor : INT (FK)
+    created_at : DATETIME
+    created_by : INT (FK)
+    updated_at : DATETIME
+    updated_by : INT (FK)
+    deleted_at : DATETIME
+    deleted_by : INT (FK)
+}
+
+entity Detalle_Venta {
+    +ID_DetalleVenta : INT (PK)
+    ID_Venta : INT (FK)
+    ID_Moto : INT (FK)
+    Cantidad : INT
+    Precio_Unitario : DECIMAL
+    Subtotal : DECIMAL
+    created_at : DATETIME
+    created_by : INT (FK)
+    updated_at : DATETIME
+    updated_by : INT (FK)
+    deleted_at : DATETIME
+    deleted_by : INT (FK)
+}
+
+entity Compra {
+    +ID_Compra : INT (PK)
+    Fecha_Compra : DATETIME
+    Total : DECIMAL
+    ID_Proveedor : INT (FK)
+    created_at : DATETIME
+    created_by : INT (FK)
+    updated_at : DATETIME
+    updated_by : INT (FK)
+    deleted_at : DATETIME
+    deleted_by : INT (FK)
+}
+
+entity Detalle_Compra {
+    +ID_DetalleCompra : INT (PK)
+    ID_Compra : INT (FK)
+    ID_Moto : INT (FK)
+    Cantidad : INT
+    Precio_Unitario : DECIMAL
+    Subtotal : DECIMAL
+    created_at : DATETIME
+    created_by : INT (FK)
+    updated_at : DATETIME
+    updated_by : INT (FK)
+    deleted_at : DATETIME
+    deleted_by : INT (FK)
+}
+
+entity Inventario {
+    +ID_Inventario : INT (PK)
+    ID_Moto : INT (FK)
+    Cantidad_Existente : INT
+    Fecha_Ultima_Actualizacion : DATETIME
+    created_at : DATETIME
+    created_by : INT (FK)
+    updated_at : DATETIME
+    updated_by : INT (FK)
+    deleted_at : DATETIME
+    deleted_by : INT (FK)
+}
+
+' Relaciones entre entidades
+Cliente "1" -- "N" Venta : Realiza
+Vendedor "1" -- "N" Venta : Registra
+Venta "1" -- "N" Detalle_Venta : Incluye
+Moto "1" -- "N" Detalle_Venta : Contiene
+Proveedor "1" -- "N" Compra : Abastece
+Compra "1" -- "N" Detalle_Compra : Incluye
+Moto "1" -- "N" Detalle_Compra : Contiene
+Moto "1" -- "1" Inventario : Tiene
+
+@enduml
