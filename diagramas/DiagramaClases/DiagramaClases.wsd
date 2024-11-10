@@ -1,0 +1,119 @@
+@startuml
+
+class Usuario {
+    - id_usuario: INT
+    - rol: VARCHAR
+    - fecha_registro: DATE
+    - created_at: DATETIME
+    - created_by: INT
+    - updated_at: DATETIME
+    - updated_by: INT
+    - deleted_at: DATETIME
+    - deleted_by: INT
+    + iniciarSesion(): void
+    + actualizarPerfil(): void
+}
+
+class Cliente {
+    - id_cliente: INT
+    - created_at: DATETIME
+    - created_by: INT
+    - updated_at: DATETIME
+    - updated_by: INT
+    - deleted_at: DATETIME
+    - deleted_by: INT
+    + verCatalogo(): void
+    + agregarAlCarrito(): void
+    + realizarCompra(): void
+}
+
+class Vendedor {
+    - id_vendedor: INT
+    - created_at: DATETIME
+    - created_by: INT
+    - updated_at: DATETIME
+    - updated_by: INT
+    - deleted_at: DATETIME
+    - deleted_by: INT
+    + registrarVenta(): void
+    + generarReporteVentas(): void
+}
+
+class Persona {
+    - id_persona: INT
+    - nombre: VARCHAR
+    - apellido: VARCHAR
+    - telefono: VARCHAR
+    - email: VARCHAR
+}
+
+class Proveedor {
+    - id_proveedor: INT
+    - created_at: DATETIME
+    - created_by: INT
+    - updated_at: DATETIME
+    - updated_by: INT
+    - deleted_at: DATETIME
+    - deleted_by: INT
+    + registrarCompra(): void
+}
+
+class Moto {
+    - id_moto: INT
+    - marca: VARCHAR
+    - modelo: VARCHAR
+    - precio: DECIMAL
+    - created_at: DATETIME
+    - created_by: INT
+    - updated_at: DATETIME
+    - updated_by: INT
+    - deleted_at: DATETIME
+    - deleted_by: INT
+}
+
+class Inventario {
+    - id_inventario: INT
+    - fecha_actualizacion: DATE
+    - precio_compra: DECIMAL
+    - precio_venta: DECIMAL
+    - cantidad: INT
+    + gestionarInventario(): void
+}
+
+class Compra {
+    - id_compra: INT
+    - fecha_compra: DATE
+    - precio_total: DECIMAL
+    + registrarCompraProveedor(): void
+}
+
+class DetalleCompra {
+    - id_detalle_compra: INT
+    - cantidad: INT
+    - precio_unitario: DECIMAL
+}
+
+class Venta {
+    - id_venta: INT
+    - fecha: DATE
+    - valor_total: DECIMAL
+    + generarReporte(): void
+}
+
+class DetalleVenta {
+    - id_detalle_venta: INT
+    - cantidad: INT
+    - precio_unitario: DECIMAL
+}
+
+Usuario "1" -- "1" Persona
+Usuario "1" -- "*" Cliente
+Usuario "1" -- "*" Vendedor
+Cliente "1" -- "*" Venta
+Vendedor "1" -- "*" Venta
+Venta "1" -- "*" DetalleVenta
+Compra "1" -- "*" DetalleCompra
+Proveedor "1" -- "*" Compra
+Inventario "1" -- "*" Moto
+
+@enduml

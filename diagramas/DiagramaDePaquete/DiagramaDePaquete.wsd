@@ -1,0 +1,159 @@
+@startuml
+package "Usuarios y Roles" {
+    class usuario {
+        + id_usuario: INT
+        + rol: VARCHAR
+        + fecha_registro: DATE
+        + created_at: DATETIME
+        + created_by: INT
+        + updated_at: DATETIME
+        + updated_by: INT
+        + deleted_at: DATETIME
+        + deleted_by: INT
+    }
+    class cliente {
+        + id_cliente: INT
+        + id_persona: INT
+        + created_at: DATETIME
+        + created_by: INT
+        + updated_at: DATETIME
+        + updated_by: INT
+        + deleted_at: DATETIME
+        + deleted_by: INT
+    }
+    class vendedor {
+        + id_vendedor: INT
+        + id_persona: INT
+        + created_at: DATETIME
+        + created_by: INT
+        + updated_at: DATETIME
+        + updated_by: INT
+        + deleted_at: DATETIME
+        + deleted_by: INT
+    }
+    class persona {
+        + id_persona: INT
+        + nombre: VARCHAR
+        + primer_apellido: VARCHAR
+        + segundo_apellido: VARCHAR
+        + telefono: VARCHAR
+        + email: VARCHAR
+        + created_at: DATETIME
+        + created_by: INT
+        + updated_at: DATETIME
+        + updated_by: INT
+        + deleted_at: DATETIME
+        + deleted_by: INT
+    }
+}
+
+package "Productos e Inventario" {
+    class moto {
+        + id_moto: INT
+        + marca: VARCHAR
+        + modelo: VARCHAR
+        + precio: DECIMAL
+        + created_at: DATETIME
+        + created_by: INT
+        + updated_at: DATETIME
+        + updated_by: INT
+        + deleted_at: DATETIME
+        + deleted_by: INT
+    }
+    class inventario {
+        + id_inventario: INT
+        + fecha_actualizacion: DATE
+        + precio_compra: VARCHAR
+        + precio_venta: VARCHAR
+        + moto_id: INT
+        + created_at: DATETIME
+        + created_by: INT
+        + updated_at: DATETIME
+        + updated_by: INT
+        + deleted_at: DATETIME
+        + deleted_by: INT
+    }
+}
+
+package "Proveedores y Compras" {
+    class proveedor {
+        + id_proveedor: INT
+        + id_persona: INT
+        + created_at: DATETIME
+        + created_by: INT
+        + updated_at: DATETIME
+        + updated_by: INT
+        + deleted_at: DATETIME
+        + deleted_by: INT
+    }
+    class compra {
+        + id_compra: INT
+        + fecha_compra: DATE
+        + precio_total: DECIMAL
+        + proveedor_id: INT
+        + created_at: DATETIME
+        + created_by: INT
+        + updated_at: DATETIME
+        + updated_by: INT
+        + deleted_at: DATETIME
+        + deleted_by: INT
+    }
+    class detalle_compra {
+        + id_detalle_compra: INT
+        + cantidad: INT
+        + precio_unitario: DECIMAL
+        + compra_id: INT
+        + moto_id: INT
+        + created_at: DATETIME
+        + created_by: INT
+        + updated_at: DATETIME
+        + updated_by: INT
+        + deleted_at: DATETIME
+        + deleted_by: INT
+    }
+}
+
+package "Ventas y Transacciones" {
+    class venta {
+        + id_venta: INT
+        + fecha: DATE
+        + valor_total: DECIMAL
+        + cliente_id: INT
+        + vendedor_id: INT
+        + created_at: DATETIME
+        + created_by: INT
+        + updated_at: DATETIME
+        + updated_by: INT
+        + deleted_at: DATETIME
+        + deleted_by: INT
+    }
+    class detalle_venta {
+        + id_detalle_venta: INT
+        + cantidad: INT
+        + precio_unitario: DECIMAL
+        + venta_id: INT
+        + moto_id: INT
+        + created_at: DATETIME
+        + created_by: INT
+        + updated_at: DATETIME
+        + updated_by: INT
+        + deleted_at: DATETIME
+        + deleted_by: INT
+    }
+}
+
+usuario --> cliente
+usuario --> vendedor
+cliente --> persona
+vendedor --> persona
+compra --> proveedor
+compra --> detalle_compra
+detalle_compra --> moto
+detalle_compra --> compra
+detalle_venta --> moto
+detalle_venta --> venta
+venta --> cliente
+venta --> vendedor
+inventario --> moto
+
+@enduml

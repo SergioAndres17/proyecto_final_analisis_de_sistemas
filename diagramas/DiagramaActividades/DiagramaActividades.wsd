@@ -1,0 +1,33 @@
+@startuml
+
+|Cliente|
+start
+:Iniciar Sesión;
+:Ver Catálogo de Motos;
+
+:¿Agregar Moto al Carrito?;
+if (Agregar al Carrito?) then (Sí)
+    :Agregar Moto al Carrito;
+endif
+
+:¿Realizar Compra?;
+if (Realizar Compra?) then (Sí)
+    :Realizar Compra;
+else (No)
+    :Cerrar Sesión;
+    stop
+endif
+
+|Sistema|
+:Registrar Compra;
+:Generar Factura;
+
+|Vendedor|
+:Registrar Venta;
+:Actualizar Inventario;
+
+|Administrador|
+:Generar Reporte de Ventas;
+
+stop
+@enduml
