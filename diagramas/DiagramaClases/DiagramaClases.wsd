@@ -110,10 +110,11 @@ Usuario "1" -- "1" Persona
 Usuario "1" -- "*" Cliente
 Usuario "1" -- "*" Vendedor
 Cliente "1" -- "*" Venta
-Vendedor "1" -- "*" Venta
+Vendedor "1" -- "*" Inventario
 Venta "1" -- "*" DetalleVenta
 Compra "1" -- "*" DetalleCompra
 Proveedor "1" -- "*" Compra
 Inventario "1" -- "*" Moto
-
+Usuario "1" -- "*" Proveedor
+Moto "1" -- "*" Venta
 @enduml
